@@ -1,0 +1,40 @@
+<h1>Hello, <%= @user.first_name %> <%= @user.last_name %>!</h1>
+<p>All da songs we got:</p>
+<table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Artist</th>
+            <th scope="col">Title</th>
+            <th scope="col">No of times song has been added</th>
+            <th scope="col">Add to Playlist</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @songs.reverse.each do |song| %>
+          <tr>
+            <td><%= song.artist %></td>
+            <td><a href="<%= playlist_path song.id %>"><%= song.title %></a></td>
+            <td><%= song.likes.length %></td>
+            <td><button><a href="<%= like_path song.id %>">Add</a></button></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <div class="row">
+        <div class="col-6">
+            <h1>Add a song</h1>
+            <form action="<%= songs_path %>" method="post">
+                <input type="hidden" name="authenticity_token" value ="<%= form_authenticity_token %>">
+                <div class="form-group">
+                    <label for="song[title]">Title</label>
+                    <input type="text" name="song[title]" class="form-control" id="song_title" aria-describedby="emailHelp" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="song[artist]">Artist</label>
+                    <input type="text" name="song[artist]" class="form-control" id="song_artist" placeholder="Artist">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Song</button>
+            </form>
+        </div>
+    </div>
+

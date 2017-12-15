@@ -1,0 +1,22 @@
+<h1><%= @user.first_name %> <%= @user.last_name %>'s playlist</h1>
+<table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Artist</th>
+            <th scope="col">Title</th>
+            <th scope="col">No of times song has been added</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @user.songs.each do |song| %>
+          <tr>
+            <td><%= song.artist %></td>
+            <td><a href="<%= playlist_path song.id %>"><%= song.title %></a></td>
+            <td><%= song.likes.length %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+
+
